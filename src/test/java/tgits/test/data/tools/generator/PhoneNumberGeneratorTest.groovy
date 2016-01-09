@@ -1,6 +1,7 @@
 package tgits.test.data.tools.generator
 
-import spock.lang.*
+import spock.lang.Shared
+import spock.lang.Specification
 import tgits.test.data.tools.validator.PhoneNumberValidator
 
 /**
