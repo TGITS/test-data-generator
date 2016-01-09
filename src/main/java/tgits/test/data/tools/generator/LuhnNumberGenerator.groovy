@@ -20,11 +20,10 @@ class LuhnNumberGenerator {
         long sum = algorithm.sumDigits(sb)
         long remainder = sum % 10
 
-        if(remainder == 0) {
+        if (remainder == 0) {
             sb.append(0)
-        }
-        else {
-            sb.append((10-remainder))
+        } else {
+            sb.append((10 - remainder))
         }
 
         return sb.toString()
@@ -44,5 +43,4 @@ class LuhnNumberGenerator {
         }
         return list;
     }
-
 }

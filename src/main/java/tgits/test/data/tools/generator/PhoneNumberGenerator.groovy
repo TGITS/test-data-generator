@@ -21,7 +21,7 @@ class PhoneNumberGenerator {
             bound = randomizer.nextInt(maxSizeList)
         }
 
-        (0..bound).each {
+        (1..bound).each {
             list << getFrenchPhoneNumber()
         }
         return list;
