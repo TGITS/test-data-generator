@@ -1,5 +1,6 @@
 package tgits.test.data.tools.generator
 
+import tgits.test.data.tools.common.LuhnNumberAlgorithm
 import tgits.test.data.tools.common.Randomizer
 
 /**
@@ -9,30 +10,14 @@ import tgits.test.data.tools.common.Randomizer
 class LuhnNumberGenerator {
 
     private Randomizer randomizer = Randomizer.instance
-
-    private long sumDigit(StringBuilder sb) {
-        long sum = 0;
-        for(int i=0; i < sb.length(); i++) {
-            if(i%2 != 0) {
-                int n = 2 * Character.digit(sb.charAt(i),10);
-                if (n > 9) {
-                    n -= 9;
-                }
-                sum += n;
-            }
-            else {
-                sum += Character.digit(sb.charAt(i),10);
-            }
-        }
-        return sum;
-    }
+    private LuhnNumberAlgorithm algorithm = LuhnNumberAlgorithm.instance
 
     String getNumber(int numberOfDigits) {
         StringBuilder sb = new StringBuilder();
 
         (1..<numberOfDigits).each { sb.append(randomizer.nextInt(10)); }
 
-        long sum = sumDigit(sb)
+        long sum = algorithm.sumDigits(sb)
         long remainder = sum % 10
 
         if(remainder == 0) {
