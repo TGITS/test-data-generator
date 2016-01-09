@@ -34,11 +34,11 @@ class LuhnNumberGenerator {
 
         int bound = randomizer.nextInt(maxSizeList)
 
-        while (bound == 0) {
+        while (bound <= 1) {
             bound = randomizer.nextInt(maxSizeList)
         }
 
-        (0..bound).each {
+        (1..bound).each {
             list << getNumber(numberOfDigits)
         }
         return list;

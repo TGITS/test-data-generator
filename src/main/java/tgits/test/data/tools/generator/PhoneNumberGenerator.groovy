@@ -17,7 +17,7 @@ class PhoneNumberGenerator {
 
         int bound = randomizer.nextInt(maxSizeList)
 
-        while (bound == 0) {
+        while (bound <= 1) {
             bound = randomizer.nextInt(maxSizeList)
         }
 
