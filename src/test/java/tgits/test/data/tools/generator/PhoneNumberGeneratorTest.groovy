@@ -8,10 +8,14 @@ import tgits.test.data.tools.validator.PhoneNumberValidator
  */
 class PhoneNumberGeneratorTest extends Specification {
 
-    @Shared def generator
-    @Shared def validator
-    @Shared String frenchPhoneNumber
-    @Shared List<String> listOfFrenchPhoneNumbers
+    @Shared
+    def generator
+    @Shared
+    def validator
+    @Shared
+    String frenchPhoneNumber
+    @Shared
+    List<String> listOfFrenchPhoneNumbers
 
     def setupSpec() {
         generator = PhoneNumberGenerator.instance
@@ -24,17 +28,23 @@ class PhoneNumberGeneratorTest extends Specification {
     }
 
     def "create a random french phone number"() {
-        when: frenchPhoneNumber = generator.getFrenchPhoneNumber()
-        then: validator.isFrenchPhoneNumber(frenchPhoneNumber)
+        when:
+        frenchPhoneNumber = generator.getFrenchPhoneNumber()
+        then:
+        validator.isFrenchPhoneNumber(frenchPhoneNumber)
     }
 
     def "create a list of random french phone numbers"() {
-        when: listOfFrenchPhoneNumbers = generator.getListOfFrenchPhoneNumbers(30)
-        then: listOfFrenchPhoneNumbers.each({ number -> validator.isFrenchPhoneNumber(number) }).inject(true) { result, i -> result && i }
+        when:
+        listOfFrenchPhoneNumbers = generator.getListOfFrenchPhoneNumbers(30)
+        then:
+        listOfFrenchPhoneNumbers.each({ number -> validator.isFrenchPhoneNumber(number) }).inject(true) { result, i -> result && i }
     }
 
     def "create a list of minimum 1 and maximum 30 random french phone numbers"() {
-        when: listOfFrenchPhoneNumbers = generator.getListOfFrenchPhoneNumbers(30)
-        then: listOfFrenchPhoneNumbers.size <= 30 && listOfFrenchPhoneNumbers.size > 0 && listOfFrenchPhoneNumbers.each({ number -> number ==~ /\+\d{11}|0\d{9}/ }).inject(true) { result, i -> result && i }
+        when:
+        listOfFrenchPhoneNumbers = generator.getListOfFrenchPhoneNumbers(30)
+        then:
+        listOfFrenchPhoneNumbers.size() <= 30 && listOfFrenchPhoneNumbers.size() > 0 && listOfFrenchPhoneNumbers.each({ number -> validator.isFrenchPhoneNumber(number) }).inject(true) { result, i -> result && i }
     }
 }

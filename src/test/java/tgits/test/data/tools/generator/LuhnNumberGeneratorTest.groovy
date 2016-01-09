@@ -1,6 +1,8 @@
 package tgits.test.data.tools.generator
 
 import org.junit.Test
+import spock.lang.Shared
+import spock.lang.Specification
 import tgits.test.data.tools.validator.LuhnNumberValidator
 
 import static java.lang.System.out
@@ -10,16 +12,41 @@ import static org.junit.Assert.assertTrue
 /**
  * Created by TGITS on 09/01/2016.
  */
-class LuhnNumberGeneratorTest {
+class LuhnNumberGeneratorTest extends Specification {
 
-    @Test
-    public void testLuhnUtilsGenerateLuhnNumber()
-    {
-        LuhnNumberGenerator generator = LuhnNumberGenerator.getInstance();
-        String number = generator.getNumber(15);
-        assertEquals(15,number.length());
-        out.println("Generated number : " + number);
-        LuhnNumberValidator validator = LuhnNumberValidator.getInstance();
-        assertTrue( validator.isLuhnNumber(number) );
+    @Shared LuhnNumberGenerator generator
+    @Shared LuhnNumberValidator validator
+    @Shared String luhnNumber
+    @Shared List<String> listOfLuhnNumbers
+
+    def setupSpec() {
+        generator = LuhnNumberGenerator.instance
+        validator = LuhnNumberValidator.instance
     }
+
+    def setup() {
+        luhnNumber = null;
+        listOfLuhnNumbers = null
+    }
+
+    def "create a random Luhn number"() {
+        when: luhnNumber = generator.getNumber(15)
+        then: validator.isLuhnNumber(luhnNumber)
+    }
+
+    def "create a random Luhn number of 15 digit"() {
+        when: luhnNumber = generator.getNumber(15)
+        then: validator.isLuhnNumber(luhnNumber) && luhnNumber.size() == 15
+    }
+
+    def "create a list of random Luhn numbers"() {
+        when: listOfLuhnNumbers = generator.getList(15, 30)
+        then: listOfLuhnNumbers.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
+    }
+
+    def "create a list of minimum 1 and maximum 30 random Luhn numbers"() {
+        when: listOfLuhnNumbers = generator.getList(15, 30)
+        then: listOfLuhnNumbers.size() <= 30 && listOfLuhnNumbers.size() > 0 && listOfLuhnNumbers.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
+    }
+
 }
