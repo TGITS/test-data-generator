@@ -4,7 +4,7 @@ package tgits.test.data.generator
  * Created by TGITS on 08/01/2016.
  */
 class PhoneNumberGenerator {
-    private Random random = new Random();
+    private Randomizer randomizer = Randomizer.instance
 
     List<String> randomListOfFrenchPhoneNumbers(int maxSizeList) throws IllegalArgumentException {
         if (maxSizeList <= 0) {
@@ -12,7 +12,12 @@ class PhoneNumberGenerator {
         }
         List<String> list = []
 
-        int bound = random.nextInt(maxSizeList) + 1
+        int bound = randomizer.nextInt(maxSizeList)
+
+        while (bound == 0) {
+            bound = randomizer.nextInt(maxSizeList)
+        }
+
         (0..bound).each {
             list << randomFrenchPhoneNumber()
         }
@@ -23,16 +28,16 @@ class PhoneNumberGenerator {
         //Generate a phone number following this pattern "\\+\\d{11}|0\\d{9}"
         StringBuilder number = new StringBuilder()
 
-        if (random.nextBoolean()) {
+        if (randomizer.nextBoolean()) {
             number << "+"
-            number << random.nextInt(10)
-            number << random.nextInt(10)
+            number << randomizer.nextInt(10)
+            number << randomizer.nextInt(10)
         } else {
             number << "0"
         }
 
         for (int i = 0; i < 9; i++) {
-            number << random.nextInt(10)
+            number << randomizer.nextInt(10)
         }
 
         return number.toString()

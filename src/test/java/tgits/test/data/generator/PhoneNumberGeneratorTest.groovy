@@ -25,8 +25,13 @@ class PhoneNumberGeneratorTest extends Specification {
         then: frenchPhoneNumber ==~ /\+\d{11}|0\d{9}/
     }
 
-    def "create a list of maximum 30 random french phone numbers"() {
+    def "create a list of random french phone numbers"() {
         when: listOfFrenchPhoneNumbers = generator.randomListOfFrenchPhoneNumbers(30)
         then: listOfFrenchPhoneNumbers.each({ number -> number ==~ /\+\d{11}|0\d{9}/ }).inject(true) { result, i -> result && i }
+    }
+
+    def "create a list of minimum 1 and maximum 30 random french phone numbers"() {
+        when: listOfFrenchPhoneNumbers = generator.randomListOfFrenchPhoneNumbers(30)
+        then: listOfFrenchPhoneNumbers.size <= 30 && listOfFrenchPhoneNumbers.size > 0 && listOfFrenchPhoneNumbers.each({ number -> number ==~ /\+\d{11}|0\d{9}/ }).inject(true) { result, i -> result && i }
     }
 }
