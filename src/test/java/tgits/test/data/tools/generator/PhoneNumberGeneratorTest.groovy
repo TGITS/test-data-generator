@@ -10,9 +10,9 @@ import tgits.test.data.tools.validator.PhoneNumberValidator
 class PhoneNumberGeneratorTest extends Specification {
 
     @Shared
-    def generator
+    PhoneNumberGenerator generator
     @Shared
-    def validator
+    PhoneNumberValidator validator
     @Shared
     String frenchPhoneNumber
     @Shared
