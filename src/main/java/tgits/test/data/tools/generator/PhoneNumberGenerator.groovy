@@ -1,12 +1,15 @@
-package tgits.test.data.generator
+package tgits.test.data.tools.generator
+
+import tgits.test.data.tools.common.Randomizer
 
 /**
  * Created by TGITS on 08/01/2016.
  */
+@Singleton
 class PhoneNumberGenerator {
     private Randomizer randomizer = Randomizer.instance
 
-    List<String> randomListOfFrenchPhoneNumbers(int maxSizeList) throws IllegalArgumentException {
+    List<String> getListOfFrenchPhoneNumbers(int maxSizeList) throws IllegalArgumentException {
         if (maxSizeList <= 0) {
             throw new IllegalArgumentException("you must provide a value greater than 0")
         }
@@ -19,12 +22,12 @@ class PhoneNumberGenerator {
         }
 
         (0..bound).each {
-            list << randomFrenchPhoneNumber()
+            list << getFrenchPhoneNumber()
         }
         return list;
     }
 
-    String randomFrenchPhoneNumber() {
+    String getFrenchPhoneNumber() {
         //Generate a phone number following this pattern "\\+\\d{11}|0\\d{9}"
         StringBuilder number = new StringBuilder()
 

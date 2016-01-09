@@ -1,6 +1,7 @@
-package tgits.test.data.generator
+package tgits.test.data.tools.generator
 
 import spock.lang.*
+import tgits.test.data.tools.validator.PhoneNumberValidator
 
 /**
  * Created by TGITS on 08/01/2016.
@@ -8,11 +9,13 @@ import spock.lang.*
 class PhoneNumberGeneratorTest extends Specification {
 
     @Shared def generator
+    @Shared def validator
     @Shared String frenchPhoneNumber
     @Shared List<String> listOfFrenchPhoneNumbers
 
     def setupSpec() {
-        generator = new PhoneNumberGenerator()
+        generator = PhoneNumberGenerator.instance
+        validator = PhoneNumberValidator.instance
     }
 
     def setup() {
@@ -21,17 +24,17 @@ class PhoneNumberGeneratorTest extends Specification {
     }
 
     def "create a random french phone number"() {
-        when: frenchPhoneNumber = generator.randomFrenchPhoneNumber()
-        then: frenchPhoneNumber ==~ /\+\d{11}|0\d{9}/
+        when: frenchPhoneNumber = generator.getFrenchPhoneNumber()
+        then: validator.isFrenchPhoneNumber(frenchPhoneNumber)
     }
 
     def "create a list of random french phone numbers"() {
-        when: listOfFrenchPhoneNumbers = generator.randomListOfFrenchPhoneNumbers(30)
-        then: listOfFrenchPhoneNumbers.each({ number -> number ==~ /\+\d{11}|0\d{9}/ }).inject(true) { result, i -> result && i }
+        when: listOfFrenchPhoneNumbers = generator.getListOfFrenchPhoneNumbers(30)
+        then: listOfFrenchPhoneNumbers.each({ number -> validator.isFrenchPhoneNumber(number) }).inject(true) { result, i -> result && i }
     }
 
     def "create a list of minimum 1 and maximum 30 random french phone numbers"() {
-        when: listOfFrenchPhoneNumbers = generator.randomListOfFrenchPhoneNumbers(30)
+        when: listOfFrenchPhoneNumbers = generator.getListOfFrenchPhoneNumbers(30)
         then: listOfFrenchPhoneNumbers.size <= 30 && listOfFrenchPhoneNumbers.size > 0 && listOfFrenchPhoneNumbers.each({ number -> number ==~ /\+\d{11}|0\d{9}/ }).inject(true) { result, i -> result && i }
     }
 }
