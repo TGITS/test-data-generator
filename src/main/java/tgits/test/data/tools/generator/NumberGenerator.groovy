@@ -25,15 +25,34 @@ class NumberGenerator {
     }
 
     List<String> getListOfIntegerAsString(int numberOfDigits, int maxSizeList) {
+
+        if (maxSizeList < 1) {
+            throw new IllegalArgumentException("The given parameter must be greater or equal to 1");
+        }
+
         List<String> list = []
 
         int bound = randomizer.nextInt(maxSizeList)
 
-        while (bound <= 1) {
+        while (bound < 1) {
             bound = randomizer.nextInt(maxSizeList)
         }
 
-        (1..bound).each {
+        (0..bound).each {
+            list << getIntegerAsString(numberOfDigits)
+        }
+        return list;
+    }
+
+    List<String> getFixedSizeListOfIntegerAsString(int numberOfDigits, int sizeList) {
+
+        if (sizeList < 1) {
+            throw new IllegalArgumentException("The given parameter must be greater or equal to 1");
+        }
+
+        List<String> list = []
+
+        (0..sizeList).each {
             list << getIntegerAsString(numberOfDigits)
         }
         return list;

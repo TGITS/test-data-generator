@@ -30,15 +30,40 @@ class LuhnNumberGenerator {
     }
 
     List<String> getList(int numberOfDigits, int maxSizeList) {
+
+        if (maxSizeList < 1) {
+            throw new IllegalArgumentException("The given parameter must be greater or equal to 1");
+        }
+
         List<String> list = []
 
         int bound = randomizer.nextInt(maxSizeList)
 
-        while (bound <= 1) {
+        while (bound < 1) {
             bound = randomizer.nextInt(maxSizeList)
         }
 
-        (1..bound).each {
+        (0..bound).each {
+            list << getNumber(numberOfDigits)
+        }
+        return list;
+    }
+
+    List<String> getFixedSizeList(int numberOfDigits, int sizeList) {
+
+        if (sizeList < 1) {
+            throw new IllegalArgumentException("The given parameter must be greater or equal to 1");
+        }
+
+        List<String> list = []
+
+        int bound = randomizer.nextInt(sizeList)
+
+        while (bound < 1) {
+            bound = randomizer.nextInt(sizeList)
+        }
+
+        (0..sizeList).each {
             list << getNumber(numberOfDigits)
         }
         return list;
