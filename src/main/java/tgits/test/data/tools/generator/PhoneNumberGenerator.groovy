@@ -28,7 +28,7 @@ class PhoneNumberGenerator {
         return number.toString()
     }
 
-    List<String> getListOfFrenchPhoneNumbers(int maxSize) throws IllegalArgumentException {
+    List<String> getRandomSizeListOfFrenchPhoneNumbers(int maxSize) throws IllegalArgumentException {
         if (maxSize <= 0) {
             throw new IllegalArgumentException("you must provide a value greater than 0")
         }
@@ -46,7 +46,7 @@ class PhoneNumberGenerator {
         return list;
     }
 
-    List<String> getFixedSizeListOfFrenchPhoneNumbers(int size) throws IllegalArgumentException {
+    List<String> getListOfFrenchPhoneNumbers(int size) throws IllegalArgumentException {
         if (size <= 0) {
             throw new IllegalArgumentException("you must provide a value greater than 0")
         }
@@ -59,6 +59,6 @@ class PhoneNumberGenerator {
     }
 
     String[] getArrayOfFrenchPhoneNumbers(int size) throws IllegalArgumentException {
-        return getFixedSizeListOfFrenchPhoneNumbers(size) as String[];
+        return getListOfFrenchPhoneNumbers(size) as String[];
     }
 }

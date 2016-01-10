@@ -29,18 +29,18 @@ class LuhnNumberGenerator {
         return sb.toString()
     }
 
-    List<String> getList(int numberOfDigits, int maxSizeList) {
+    List<String> getRandomSizeList(int numberOfDigits, int maxSize) {
 
-        if (maxSizeList < 1) {
+        if (maxSize < 1) {
             throw new IllegalArgumentException("The given parameter must be greater or equal to 1");
         }
 
         List<String> list = []
 
-        int bound = randomizer.nextInt(maxSizeList)
+        int bound = randomizer.nextInt(maxSize)
 
         while (bound < 1) {
-            bound = randomizer.nextInt(maxSizeList)
+            bound = randomizer.nextInt(maxSize)
         }
 
         (0..bound).each {
@@ -49,23 +49,27 @@ class LuhnNumberGenerator {
         return list;
     }
 
-    List<String> getFixedSizeList(int numberOfDigits, int sizeList) {
+    List<String> getList(int numberOfDigits, int size) {
 
-        if (sizeList < 1) {
+        if (size < 1) {
             throw new IllegalArgumentException("The given parameter must be greater or equal to 1");
         }
 
         List<String> list = []
 
-        int bound = randomizer.nextInt(sizeList)
+        int bound = randomizer.nextInt(size)
 
         while (bound < 1) {
-            bound = randomizer.nextInt(sizeList)
+            bound = randomizer.nextInt(size)
         }
 
-        (0..sizeList).each {
+        (0..size).each {
             list << getNumber(numberOfDigits)
         }
-        return list;
+        return list
+    }
+
+    String[] getArray(int numberOfDigits, int size) {
+        return getList(numberOfDigits,size) as String[]
     }
 }

@@ -44,14 +44,14 @@ class LuhnNumberGeneratorTest extends Specification {
 
     def "create a list of random Luhn numbers"() {
         when:
-        listOfLuhnNumbers = generator.getList(15, 30)
+        listOfLuhnNumbers = generator.getRandomSizeList(15, 30)
         then:
         listOfLuhnNumbers.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
     }
 
     def "create a list of minimum 1 and maximum 30 random Luhn numbers"() {
         when:
-        listOfLuhnNumbers = generator.getList(15, 30)
+        listOfLuhnNumbers = generator.getRandomSizeList(15, 30)
         then:
         listOfLuhnNumbers.size() <= 30 && listOfLuhnNumbers.size() > 0 && listOfLuhnNumbers.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
     }
