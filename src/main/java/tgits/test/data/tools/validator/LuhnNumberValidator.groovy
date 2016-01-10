@@ -25,12 +25,14 @@ class LuhnNumberValidator {
         /*
          * Then we check that the given String is a correct number, this is the String is composed only with digit
          */
-        if(!validator.stringIsAnInteger(number)) {
-            throw new IllegalArgumentException("The given parameter must be a correct integer number");
+        if(!validator.stringIsAPositiveInteger(number)) {
+            throw new IllegalArgumentException("The given parameter must be a correct positive integer number");
         }
 
-        /* Implementation of the algorithm */
         StringBuilder sb = new StringBuilder(number);
+        if(number.startsWith("+")) {sb.delete(0,1)}
+
+        /* Implementation of the algorithm */
         sb.reverse();
         return (algorithm.sumDigits(sb) % 10 == 0);
     }
