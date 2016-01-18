@@ -6,15 +6,15 @@ package tgits.test.data.tools.validator
 @Singleton
 class IntegerValidator {
 
-    boolean isAnInteger(String number) {
+    boolean isInteger(String number) {
         return number ==~ /(\+|\-)?\d+/;
     }
 
-    boolean isAPositiveInteger(String number) {
+    boolean isPositiveInteger(String number) {
         return number ==~ /(\+)?\d+/;
     }
 
-    boolean isANegativeInteger(String number) {
+    boolean isNegativeInteger(String number) {
         return number ==~ /\-\d+/;
     }
 }

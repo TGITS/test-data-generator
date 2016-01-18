@@ -129,7 +129,7 @@ class LuhnNumberGeneratorTest extends Specification {
         list = generator.createList(15, 0, false)
         then:
         IllegalArgumentException ex = thrown()
-        ex.message == "The given parameter representing the size of the list must be greater or equal to 1"
+        ex.message == "The given parameter representing the size must be greater or equal to 1"
     }
 
     def "trying to create a list of -7 Luhn number"() {
@@ -137,7 +137,7 @@ class LuhnNumberGeneratorTest extends Specification {
         list = generator.createList(15, -7, false)
         then:
         IllegalArgumentException ex = thrown()
-        ex.message == "The given parameter representing the size of the list must be greater or equal to 1"
+        ex.message == "The given parameter representing the size must be greater or equal to 1"
     }
 
     def "trying to create a list of -7 Luhn number with -15 digits"() {
@@ -145,6 +145,6 @@ class LuhnNumberGeneratorTest extends Specification {
         list = generator.createList(-15, -7, false)
         then:
         IllegalArgumentException ex = thrown()
-        ex.message == "The given parameter representing the size of the list must be greater or equal to 1"
+        ex.message == "The given parameter representing the size must be greater or equal to 1"
     }
 }

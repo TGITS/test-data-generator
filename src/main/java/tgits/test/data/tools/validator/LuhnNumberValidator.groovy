@@ -25,7 +25,7 @@ class LuhnNumberValidator {
         /*
          * Then we check that the given String is a correct number, this is the String is composed only with digit
          */
-        if (!validator.isAPositiveInteger(number)) {
+        if (!validator.isPositiveInteger(number)) {
             throw new IllegalArgumentException("The given parameter must be a correct positive integer number");
         }
 
