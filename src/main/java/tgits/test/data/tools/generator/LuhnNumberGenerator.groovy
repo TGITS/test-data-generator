@@ -12,7 +12,7 @@ class LuhnNumberGenerator {
     private Randomizer randomizer = Randomizer.instance
     private LuhnNumberAlgorithm algorithm = LuhnNumberAlgorithm.instance
 
-    String getNumber(int numberOfDigits) {
+    String create(int numberOfDigits) {
         StringBuilder sb = new StringBuilder();
 
         (1..<numberOfDigits).each { sb.append(randomizer.nextInt(10)); }
@@ -29,7 +29,7 @@ class LuhnNumberGenerator {
         return sb.toString()
     }
 
-    List<String> getRandomSizeList(int numberOfDigits, int maxSize) {
+    List<String> createRandomSizeList(int numberOfDigits, int maxSize) {
 
         if (maxSize < 1) {
             throw new IllegalArgumentException("The given parameter must be greater or equal to 1");
@@ -44,12 +44,12 @@ class LuhnNumberGenerator {
         }
 
         (0..bound).each {
-            list << getNumber(numberOfDigits)
+            list << create(numberOfDigits)
         }
         return list;
     }
 
-    List<String> getList(int numberOfDigits, int size) {
+    List<String> createList(int numberOfDigits, int size) {
 
         if (size < 1) {
             throw new IllegalArgumentException("The given parameter must be greater or equal to 1");
@@ -58,12 +58,12 @@ class LuhnNumberGenerator {
         List<String> list = []
 
         (1..size).each {
-            list << getNumber(numberOfDigits)
+            list << create(numberOfDigits)
         }
         return list
     }
 
-    String[] getArray(int numberOfDigits, int size) {
-        return getList(numberOfDigits,size) as String[]
+    String[] createArray(int numberOfDigits, int size) {
+        return createList(numberOfDigits,size) as String[]
     }
 }
