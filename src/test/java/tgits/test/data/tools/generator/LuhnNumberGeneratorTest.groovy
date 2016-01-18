@@ -30,7 +30,14 @@ class LuhnNumberGeneratorTest extends Specification {
         list = null
     }
 
-    def "create a random Luhn number"() {
+    def "create a random Luhn number of 1 digit"() {
+        when:
+        number = generator.create(1)
+        then:
+        validator.isLuhnNumber(number)
+    }
+
+    def "create a random Luhn number of 12 digit"() {
         when:
         number = generator.create(12)
         then:
@@ -53,50 +60,90 @@ class LuhnNumberGeneratorTest extends Specification {
 
     def "create a list of random Luhn number of different size"() {
         when:
-        list = (2..30).collect { generator.create(it) }
+        list = (1..50).collect { generator.create(it) }
         then:
         list.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
     }
 
     def "create a random sized list of random Luhn numbers"() {
         when:
-        list = generator.createList(15,30,true)
+        list = generator.createList(15, 30, true)
         then:
         list.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
     }
 
     def "create a list of minimum 1 and maximum 30 random Luhn numbers"() {
         when:
-        list = generator.createList(15,30,true)
+        list = generator.createList(15, 30, true)
         then:
         list.size() <= 30 && list.size() > 0 && list.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
     }
 
     def "create a list of 20 Luhn numbers"() {
         when:
-        list = generator.createList(15,20,false)
+        list = generator.createList(15, 20, false)
         then:
         list.size() == 20 && list.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
     }
 
     def "create an array of 20 Luhn numbers"() {
         when:
-        array = generator.createArray(15,20)
+        array = generator.createArray(15, 20)
         then:
         array.size() == 20 && array.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
     }
 
     def "create a list of 1 Luhn number"() {
         when:
-        list = generator.createList(15,1,false)
+        list = generator.createList(15, 1, false)
         then:
         list.size() == 1 && list.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
     }
 
     def "create an array of 1 Luhn number"() {
         when:
-        array = generator.createArray(15,1)
+        array = generator.createArray(15, 1)
         then:
         array.size() == 1 && array.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
+    }
+
+    def "trying to create a Luhn number with 0 digit"() {
+        when:
+        number = generator.create(0)
+        then:
+        IllegalArgumentException ex = thrown()
+        ex.message == "The given parameter representing the number of digits of the number must be greater or equal to 1"
+    }
+
+    def "trying to create a Luhn number with -5 digit"() {
+        when:
+        number = generator.create(-5)
+        then:
+        IllegalArgumentException ex = thrown()
+        ex.message == "The given parameter representing the number of digits of the number must be greater or equal to 1"
+    }
+
+    def "trying to create a list of 0 Luhn number "() {
+        when:
+        list = generator.createList(15, 0, false)
+        then:
+        IllegalArgumentException ex = thrown()
+        ex.message == "The given parameter representing the size of the list must be greater or equal to 1"
+    }
+
+    def "trying to create a list of -7 Luhn number "() {
+        when:
+        list = generator.createList(15, -7, false)
+        then:
+        IllegalArgumentException ex = thrown()
+        ex.message == "The given parameter representing the size of the list must be greater or equal to 1"
+    }
+
+    def "trying to create a list of -7 Luhn number with -15 digits"() {
+        when:
+        list = generator.createList(-15, -7, false)
+        then:
+        IllegalArgumentException ex = thrown()
+        ex.message == "The given parameter representing the size of the list must be greater or equal to 1"
     }
 }
