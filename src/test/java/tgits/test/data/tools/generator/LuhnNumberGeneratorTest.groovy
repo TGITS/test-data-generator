@@ -14,11 +14,11 @@ class LuhnNumberGeneratorTest extends Specification {
     @Shared
     LuhnNumberValidator validator
     @Shared
-    String luhnNumber
+    String number
     @Shared
-    List<String> listOfLuhnNumbers
+    List<String> list
     @Shared
-    String[] arrayOfLuhnNumbers
+    String[] array
 
     def setupSpec() {
         generator = LuhnNumberGenerator.instance
@@ -26,63 +26,77 @@ class LuhnNumberGeneratorTest extends Specification {
     }
 
     def setup() {
-        luhnNumber = null;
-        listOfLuhnNumbers = null
+        number = null;
+        list = null
     }
 
     def "create a random Luhn number"() {
         when:
-        luhnNumber = generator.create(15)
+        number = generator.create(12)
         then:
-        validator.isLuhnNumber(luhnNumber)
+        validator.isLuhnNumber(number)
     }
 
-    def "create a random Luhn number of 15 digit"() {
+    def "create a random Luhn number of 15 digits"() {
         when:
-        luhnNumber = generator.create(15)
+        number = generator.create(15)
         then:
-        validator.isLuhnNumber(luhnNumber) && luhnNumber.size() == 15
+        validator.isLuhnNumber(number) && number.size() == 15
+    }
+
+    def "create a random Luhn number of 16 digits"() {
+        when:
+        number = generator.create(16)
+        then:
+        validator.isLuhnNumber(number) && number.size() == 16
+    }
+
+    def "create a list of random Luhn number of different size"() {
+        when:
+        list = (2..30).collect { generator.create(it) }
+        then:
+        list.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
     }
 
     def "create a random sized list of random Luhn numbers"() {
         when:
-        listOfLuhnNumbers = generator.createRandomSizeList(15, 30)
+        list = generator.createList(15,30,true)
         then:
-        listOfLuhnNumbers.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
+        list.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
     }
 
     def "create a list of minimum 1 and maximum 30 random Luhn numbers"() {
         when:
-        listOfLuhnNumbers = generator.createRandomSizeList(15, 30)
+        list = generator.createList(15,30,true)
         then:
-        listOfLuhnNumbers.size() <= 30 && listOfLuhnNumbers.size() > 0 && listOfLuhnNumbers.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
+        list.size() <= 30 && list.size() > 0 && list.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
     }
 
     def "create a list of 20 Luhn numbers"() {
         when:
-        listOfLuhnNumbers = generator.createList(15,20)
+        list = generator.createList(15,20,false)
         then:
-        listOfLuhnNumbers.size() == 20 && listOfLuhnNumbers.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
+        list.size() == 20 && list.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
     }
 
     def "create an array of 20 Luhn numbers"() {
         when:
-        arrayOfLuhnNumbers = generator.createArray(15,20)
+        array = generator.createArray(15,20)
         then:
-        arrayOfLuhnNumbers.size() == 20 && arrayOfLuhnNumbers.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
+        array.size() == 20 && array.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
     }
 
     def "create a list of 1 Luhn number"() {
         when:
-        listOfLuhnNumbers = generator.createList(15,1)
+        list = generator.createList(15,1,false)
         then:
-        listOfLuhnNumbers.size() == 1 && listOfLuhnNumbers.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
+        list.size() == 1 && list.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
     }
 
     def "create an array of 1 Luhn number"() {
         when:
-        arrayOfLuhnNumbers = generator.createArray(15,1)
+        array = generator.createArray(15,1)
         then:
-        arrayOfLuhnNumbers.size() == 1 && arrayOfLuhnNumbers.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
+        array.size() == 1 && array.each({ number -> validator.isLuhnNumber(number) }).inject(true) { result, i -> result && i }
     }
 }

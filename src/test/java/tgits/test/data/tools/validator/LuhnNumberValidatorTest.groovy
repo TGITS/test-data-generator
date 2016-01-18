@@ -39,9 +39,30 @@ class LuhnNumberValidatorTest extends Specification {
         !validator.isLuhnNumber(luhnNumber)
     }
 
+    def "check that 1111 is not a Luhn number"() {
+        when:
+        luhnNumber = "1111"
+        then:
+        !validator.isLuhnNumber(luhnNumber)
+    }
+
     def "check that 972487086 is a Luhn number"() {
         when:
         luhnNumber = "972487086"
+        then:
+        validator.isLuhnNumber(luhnNumber)
+    }
+
+    def "check that 543215 is a Luhn number"() {
+        when:
+        luhnNumber = "543215"
+        then:
+        validator.isLuhnNumber(luhnNumber)
+    }
+
+    def "check that 8763 is a Luhn number"() {
+        when:
+        luhnNumber = "8763"
         then:
         validator.isLuhnNumber(luhnNumber)
     }

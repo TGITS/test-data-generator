@@ -16,15 +16,16 @@ class LuhnNumberGenerator {
         StringBuilder sb = new StringBuilder();
 
         (1..<numberOfDigits).each { sb.append(randomizer.nextInt(10)); }
+        sb.append(0)
 
-        long sum = algorithm.sumDigits(sb)
+        long sum = algorithm.sumDigits(sb.reverse())
         long remainder = sum % 10
 
-        if (remainder == 0) {
-            sb.append(0)
-        } else {
-            sb.append((10 - remainder))
+
+        if (remainder != 0) {
+            sb.replace(0,1,(10 - remainder).toString())
         }
+        sb.reverse();
 
         return sb.toString()
     }
@@ -49,7 +50,7 @@ class LuhnNumberGenerator {
         return list;
     }
 
-    List<String> createList(int numberOfDigits, int size) {
+    List<String> createList(int numberOfDigits, int size, boolean randomSize) {
 
         if (size < 1) {
             throw new IllegalArgumentException("The given parameter must be greater or equal to 1");
@@ -57,13 +58,22 @@ class LuhnNumberGenerator {
 
         List<String> list = []
 
-        (1..size).each {
+        int bound = size
+        if (randomSize) {
+            bound = randomizer.nextInt(size+1)
+
+            while (bound < 1) {
+                bound = randomizer.nextInt(size+1)
+            }
+        }
+
+        (1..bound).each {
             list << create(numberOfDigits)
         }
         return list
     }
 
     String[] createArray(int numberOfDigits, int size) {
-        return createList(numberOfDigits,size) as String[]
+        return createList(numberOfDigits,size,false) as String[]
     }
 }
