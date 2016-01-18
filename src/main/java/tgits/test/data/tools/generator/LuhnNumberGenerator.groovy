@@ -57,13 +57,7 @@ class LuhnNumberGenerator {
 
         List<String> list = []
 
-        int bound = randomizer.nextInt(size)
-
-        while (bound < 1) {
-            bound = randomizer.nextInt(size)
-        }
-
-        (0..size).each {
+        (1..size).each {
             list << getNumber(numberOfDigits)
         }
         return list
