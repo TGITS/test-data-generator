@@ -6,7 +6,7 @@ import tgits.test.data.tools.common.Randomizer
  * Created by TGITS on 08/01/2016.
  */
 @Singleton
-class PhoneNumberGenerator {
+class FrenchPhoneNumberGenerator {
     private Randomizer randomizer = Randomizer.instance
 
     String getFrenchPhoneNumber() {

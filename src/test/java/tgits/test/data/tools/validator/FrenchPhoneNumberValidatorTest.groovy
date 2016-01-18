@@ -2,22 +2,21 @@ package tgits.test.data.tools.validator
 
 import spock.lang.Shared
 import spock.lang.Specification
-import tgits.test.data.tools.generator.PhoneNumberGenerator
 
 /**
  * Created by cvaudry on 09/01/2016.
  */
-class PhoneNumberValidatorTest extends Specification{
+class FrenchPhoneNumberValidatorTest extends Specification{
 
     @Shared
-    PhoneNumberValidator validator
+    FrenchPhoneNumberValidator validator
     @Shared
     String frenchPhoneNumber
     @Shared
     List<String> listOfFrenchPhoneNumbers
 
     def setupSpec() {
-        validator = PhoneNumberValidator.instance
+        validator = FrenchPhoneNumberValidator.instance
     }
 
     def setup() {
