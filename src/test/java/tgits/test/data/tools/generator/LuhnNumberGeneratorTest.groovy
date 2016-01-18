@@ -124,7 +124,7 @@ class LuhnNumberGeneratorTest extends Specification {
         ex.message == "The given parameter representing the number of digits of the number must be greater or equal to 1"
     }
 
-    def "trying to create a list of 0 Luhn number "() {
+    def "trying to create a list of 0 Luhn number"() {
         when:
         list = generator.createList(15, 0, false)
         then:
@@ -132,7 +132,7 @@ class LuhnNumberGeneratorTest extends Specification {
         ex.message == "The given parameter representing the size of the list must be greater or equal to 1"
     }
 
-    def "trying to create a list of -7 Luhn number "() {
+    def "trying to create a list of -7 Luhn number"() {
         when:
         list = generator.createList(15, -7, false)
         then:
