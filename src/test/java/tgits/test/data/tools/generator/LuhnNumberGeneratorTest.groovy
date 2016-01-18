@@ -38,7 +38,7 @@ class LuhnNumberGeneratorTest extends Specification {
         validator.isLuhnNumber(number)
     }
 
-    def "create a random Luhn number of 12 digit"() {
+    def "create a random Luhn number of 12 digits"() {
         when:
         number = generator.create(12)
         then:

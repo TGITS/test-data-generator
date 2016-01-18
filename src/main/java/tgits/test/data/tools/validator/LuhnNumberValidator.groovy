@@ -13,7 +13,7 @@ class LuhnNumberValidator {
      */
     boolean isLuhnNumber(String number) {
 
-        NumberValidator validator = NumberValidator.instance
+        IntegerValidator validator = IntegerValidator.instance
         LuhnNumberAlgorithm algorithm = LuhnNumberAlgorithm.instance
         /*
          * First we check that the given String is not null ; if it is we throw an IllegalArgumentException
@@ -25,7 +25,7 @@ class LuhnNumberValidator {
         /*
          * Then we check that the given String is a correct number, this is the String is composed only with digit
          */
-        if(!validator.stringIsAPositiveInteger(number)) {
+        if (!validator.isAPositiveInteger(number)) {
             throw new IllegalArgumentException("The given parameter must be a correct positive integer number");
         }
 
