@@ -13,6 +13,11 @@ class LuhnNumberGenerator {
     private LuhnNumberAlgorithm algorithm = LuhnNumberAlgorithm.instance
 
     String create(int numberOfDigits) {
+
+        if (numberOfDigits < 1) {
+            throw new IllegalArgumentException("The given parameter representing the number of digits of the number must be greater or equal to 1");
+        }
+
         StringBuilder sb = new StringBuilder();
 
         (1..<numberOfDigits).each { sb.append(randomizer.nextInt(10)); }
@@ -33,7 +38,7 @@ class LuhnNumberGenerator {
     List<String> createList(int numberOfDigits, int size, boolean randomSize) {
 
         if (size < 1) {
-            throw new IllegalArgumentException("The given parameter must be greater or equal to 1");
+            throw new IllegalArgumentException("The given parameter representing the size of the list must be greater or equal to 1");
         }
 
         List<String> list = []
