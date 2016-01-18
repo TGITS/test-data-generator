@@ -30,26 +30,6 @@ class LuhnNumberGenerator {
         return sb.toString()
     }
 
-    List<String> createRandomSizeList(int numberOfDigits, int maxSize) {
-
-        if (maxSize < 1) {
-            throw new IllegalArgumentException("The given parameter must be greater or equal to 1");
-        }
-
-        List<String> list = []
-
-        int bound = randomizer.nextInt(maxSize)
-
-        while (bound < 1) {
-            bound = randomizer.nextInt(maxSize)
-        }
-
-        (0..bound).each {
-            list << create(numberOfDigits)
-        }
-        return list;
-    }
-
     List<String> createList(int numberOfDigits, int size, boolean randomSize) {
 
         if (size < 1) {
