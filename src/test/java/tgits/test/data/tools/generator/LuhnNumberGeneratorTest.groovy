@@ -26,8 +26,9 @@ class LuhnNumberGeneratorTest extends Specification {
     }
 
     def setup() {
-        number = null;
+        number = null
         list = null
+        array = null
     }
 
     def "create a random Luhn number of 1 digit"() {
