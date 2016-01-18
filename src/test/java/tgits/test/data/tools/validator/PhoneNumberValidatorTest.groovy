@@ -25,7 +25,7 @@ class PhoneNumberValidatorTest extends Specification{
         listOfFrenchPhoneNumbers = null
     }
 
-    def "create a list of element which are note french phone numbers"() {
+    def "create a list of element which are not french phone numbers"() {
         when:
         listOfFrenchPhoneNumbers = ["1234567890987654321", "123-456-345", "ABCDEF"]
         then:
