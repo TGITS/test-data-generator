@@ -2,8 +2,6 @@ package tgits.test.data.tools.common
 
 import spock.lang.Shared
 import spock.lang.Specification
-import tgits.test.data.tools.generator.LuhnNumberGenerator
-import tgits.test.data.tools.validator.LuhnNumberValidator
 
 /**
  * Created by TGITS on 09/01/2016.
@@ -17,7 +15,7 @@ class LuhnNumberAlgorithmTest extends Specification {
     LuhnNumberAlgorithm algorithm
 
     @Shared
-    String number
+    long number
 
 
     def setupSpec() {
@@ -25,21 +23,21 @@ class LuhnNumberAlgorithmTest extends Specification {
     }
 
     def setup() {
-        number = null
+        number = 0L
     }
 
     def "calculate the sum for 972487086 that must be equal to 50"() {
         when:
-        number = algorithm.sumDigits(972487086)
+        number = algorithm.sumDigits("972487086")
         then:
-        number == 50
+        number == 50L
     }
 
     def "calculate the sum for 927487086 that must be equal to 50"() {
         when:
-        number = algorithm.sumDigits(927487086)
+        number = algorithm.sumDigits("927487086")
         then:
-        number == 54
+        number == 54L
     }
 
 }

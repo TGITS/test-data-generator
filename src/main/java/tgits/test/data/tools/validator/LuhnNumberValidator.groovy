@@ -33,7 +33,6 @@ class LuhnNumberValidator {
         if(number.startsWith("+")) {sb.delete(0,1)}
 
         /* Implementation of the algorithm */
-        sb.reverse();
         return (algorithm.sumDigits(sb) % 10 == 0);
     }
 }

@@ -23,14 +23,12 @@ class LuhnNumberGenerator {
         (1..<numberOfDigits).each { sb.append(randomizer.nextInt(10)); }
         sb.append(0)
 
-        long sum = algorithm.sumDigits(sb.reverse())
+        long sum = algorithm.sumDigits(sb)
         long remainder = sum % 10
 
-
         if (remainder != 0) {
-            sb.replace(0,1,(10 - remainder).toString())
+            sb.replace(sb.length() - 1, sb.length(), (10 - remainder).toString())
         }
-        sb.reverse();
 
         return sb.toString()
     }

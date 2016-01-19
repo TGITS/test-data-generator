@@ -6,6 +6,7 @@ package tgits.test.data.tools.common
 @Singleton
 class LuhnNumberAlgorithm {
     long sumDigits(StringBuilder sb) {
+        sb.reverse()
         long sum = 0;
         for(int i=0; i < sb.length(); i++) {
             if(i%2 != 0) {
@@ -19,6 +20,7 @@ class LuhnNumberAlgorithm {
                 sum += Character.digit(sb.charAt(i),10);
             }
         }
+        sb.reverse()
         return sum;
     }
 
@@ -26,7 +28,4 @@ class LuhnNumberAlgorithm {
         return sumDigits(new StringBuilder(s))
     }
 
-    long sumDigits(Integer i) {
-        return sumDigits(new StringBuilder(i))
-    }
 }
