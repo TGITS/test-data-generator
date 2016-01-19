@@ -14,9 +14,11 @@ class FrenchPhoneNumberGeneratorTest extends Specification {
     @Shared
     FrenchPhoneNumberValidator validator
     @Shared
-    String frenchPhoneNumber
+    String number
     @Shared
-    List<String> listOfFrenchPhoneNumbers
+    List<String> list
+    @Shared
+    String[] array
 
     def setupSpec() {
         generator = FrenchPhoneNumberGenerator.instance
@@ -24,30 +26,43 @@ class FrenchPhoneNumberGeneratorTest extends Specification {
     }
 
     def setup() {
-        frenchPhoneNumber = null;
-        listOfFrenchPhoneNumbers = null
+        number = null;
+        list = null
     }
 
     def "create a random french phone number"() {
         when:
-        frenchPhoneNumber = generator.create()
+        number = generator.create()
         then:
-        validator.isFrenchPhoneNumber(frenchPhoneNumber)
+        validator.isFrenchPhoneNumber(number)
     }
 
     def "create a list of random french phone numbers"() {
         when:
-        listOfFrenchPhoneNumbers = generator.createList(30, true)
+        list = generator.createList(30, true)
         then:
-        listOfFrenchPhoneNumbers.collect({ number -> validator.isFrenchPhoneNumber(number) }).inject(true) { result, i -> result && i }
+        list.every { number -> validator.isFrenchPhoneNumber(number) }
     }
 
     def "create a list of minimum 1 and maximum 30 random french phone numbers"() {
         when:
-        listOfFrenchPhoneNumbers = generator.createList(30, true)
+        list = generator.createList(30, true)
         then:
-        listOfFrenchPhoneNumbers.size() <= 30 && listOfFrenchPhoneNumbers.size() > 0 && listOfFrenchPhoneNumbers.collect({ number -> validator.isFrenchPhoneNumber(number) }).inject(true) { result, i -> result && i }
+        list.size() <= 30 && list.size() > 0 && list.every { number -> validator.isFrenchPhoneNumber(number) }
     }
 
+    def "create a list of exactly 50 random french phone numbers"() {
+        when:
+        list = generator.createList(50, false)
+        then:
+        list.size() == 50 && list.every { number -> validator.isFrenchPhoneNumber(number) }
+    }
+
+    def "create an array of 60 random french phone numbers"() {
+        when:
+        array = generator.createArray(60)
+        then:
+        array.size() == 60 && array.every { number -> validator.isFrenchPhoneNumber(number) }
+    }
 
 }
