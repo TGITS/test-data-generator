@@ -26,30 +26,30 @@ class IntegerValidatorTest extends Specification {
 
     def "check that all numbers in the list are integers"() {
         when:
-        this.list = ["1234567890", "1", "-12343", "+1234567890", "0", "+0", "-0"]
+        list = ["1234567890", "1", "-12343", "+1234567890", "0", "+0", "-0"]
         then:
-        this.list.collect({ number -> validator.isInteger(number) }).inject(true) { result, i -> result && i }
+        list.every { number -> validator.isInteger(number) }
     }
 
     def "check that all numbers in the list are positive integers"() {
         when:
-        this.list = ["1234567890", "1", "+12343", "+1234567890", "0", "+0", "12356"]
+        list = ["1234567890", "1", "+12343", "+1234567890", "0", "+0", "12356"]
         then:
-        this.list.collect({ number -> validator.isPositiveInteger(number) }).inject(true) { result, i -> result && i }
+        list.every { number -> validator.isPositiveInteger(number) }
     }
 
     def "check that all numbers in the list are negative integers"() {
         when:
-        this.list = ["-1234567890", "-1", "-12343", "-1234567890", "-0", "-12356"]
+        list = ["-1234567890", "-1", "-12343", "-1234567890", "-0", "-12356"]
         then:
-        this.list.collect({ number -> validator.isNegativeInteger(number) }).inject(true) { result, i -> result && i }
+        list.every { number -> validator.isNegativeInteger(number) }
     }
 
     def "check that all values in the list notIntegerNumbers are not integer numbers"() {
         when:
         list = ["12345NotAStringThatIsANumber", "NotAStringThatIsANumber", "123.456", "789,987", "++123", "-+123", "ABC0123"]
         then:
-        list.collect({ number -> !validator.isInteger(number) }).inject(true) { result, i -> result && i }
+        list.every { number -> !validator.isInteger(number) }
     }
 
     def "check that NotAStringThatIsANumber is not an integer number"() {
