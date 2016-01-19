@@ -28,37 +28,29 @@ class FrenchPhoneNumberGenerator {
         return number.toString()
     }
 
-    List<String> createList(int maxSize) throws IllegalArgumentException {
-        if (maxSize <= 0) {
-            throw new IllegalArgumentException("you must provide a value greater than 0")
-        }
-        List<String> list = []
-
-        int bound = randomizer.nextInt(maxSize)
-
-        while (bound <= 1) {
-            bound = randomizer.nextInt(maxSize)
-        }
-
-        (1..bound).each {
-            list << create()
-        }
-        return list;
-    }
-
-    List<String> getListOfFrenchPhoneNumbers(int size) throws IllegalArgumentException {
+    List<String> createList(int size, boolean randomSize) throws IllegalArgumentException {
         if (size <= 0) {
             throw new IllegalArgumentException("you must provide a value greater than 0")
         }
         List<String> list = []
 
-        (1..size).each {
+        int bound = size
+        if (randomSize) {
+            bound = randomizer.nextInt(size + 1)
+
+            while (bound < 1) {
+                bound = randomizer.nextInt(size + 1)
+            }
+        }
+
+        (1..bound).each {
             list << create()
         }
+
         return list;
     }
 
     String[] createArray(int size) throws IllegalArgumentException {
-        return getListOfFrenchPhoneNumbers(size) as String[];
+        return createList(size, false) as String[];
     }
 }

@@ -37,14 +37,14 @@ class FrenchPhoneNumberGeneratorTest extends Specification {
 
     def "create a list of random french phone numbers"() {
         when:
-        listOfFrenchPhoneNumbers = generator.createList(30)
+        listOfFrenchPhoneNumbers = generator.createList(30, true)
         then:
         listOfFrenchPhoneNumbers.collect({ number -> validator.isFrenchPhoneNumber(number) }).inject(true) { result, i -> result && i }
     }
 
     def "create a list of minimum 1 and maximum 30 random french phone numbers"() {
         when:
-        listOfFrenchPhoneNumbers = generator.createList(30)
+        listOfFrenchPhoneNumbers = generator.createList(30, true)
         then:
         listOfFrenchPhoneNumbers.size() <= 30 && listOfFrenchPhoneNumbers.size() > 0 && listOfFrenchPhoneNumbers.collect({ number -> validator.isFrenchPhoneNumber(number) }).inject(true) { result, i -> result && i }
     }
