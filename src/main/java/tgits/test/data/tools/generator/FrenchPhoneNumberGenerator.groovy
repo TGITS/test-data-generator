@@ -9,7 +9,7 @@ import tgits.test.data.tools.common.Randomizer
 class FrenchPhoneNumberGenerator {
     private Randomizer randomizer = Randomizer.instance
 
-    String getFrenchPhoneNumber() {
+    String create() {
         //Generate a phone number following this pattern "\\+\\d{11}|0\\d{9}"
         StringBuilder number = new StringBuilder()
 
@@ -28,7 +28,7 @@ class FrenchPhoneNumberGenerator {
         return number.toString()
     }
 
-    List<String> getRandomSizeListOfFrenchPhoneNumbers(int maxSize) throws IllegalArgumentException {
+    List<String> createList(int maxSize) throws IllegalArgumentException {
         if (maxSize <= 0) {
             throw new IllegalArgumentException("you must provide a value greater than 0")
         }
@@ -41,7 +41,7 @@ class FrenchPhoneNumberGenerator {
         }
 
         (1..bound).each {
-            list << getFrenchPhoneNumber()
+            list << create()
         }
         return list;
     }
@@ -53,12 +53,12 @@ class FrenchPhoneNumberGenerator {
         List<String> list = []
 
         (1..size).each {
-            list << getFrenchPhoneNumber()
+            list << create()
         }
         return list;
     }
 
-    String[] getArrayOfFrenchPhoneNumbers(int size) throws IllegalArgumentException {
+    String[] createArray(int size) throws IllegalArgumentException {
         return getListOfFrenchPhoneNumbers(size) as String[];
     }
 }
