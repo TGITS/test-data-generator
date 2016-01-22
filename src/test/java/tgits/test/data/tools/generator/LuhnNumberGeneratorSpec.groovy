@@ -7,7 +7,7 @@ import tgits.test.data.tools.validator.LuhnNumberValidator
 /**
  * Created by TGITS on 09/01/2016.
  */
-class LuhnNumberGeneratorTest extends Specification {
+class LuhnNumberGeneratorSpec extends Specification {
 
     @Shared
     LuhnNumberGenerator generator

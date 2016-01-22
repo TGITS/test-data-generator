@@ -6,7 +6,7 @@ import spock.lang.Specification
 /**
  * Created by TGITS on 09/01/2016.
  */
-class LuhnNumberAlgorithmTest extends Specification {
+class LuhnNumberAlgorithmSpec extends Specification {
 
     @Shared
     LuhnNumberAlgorithm algorithm

@@ -1,17 +1,13 @@
 package tgits.test.data.tools.validator
 
-import org.junit.Test
 import spock.lang.Shared
 import spock.lang.Specification
 import tgits.test.data.tools.common.Randomizer
 
-import static org.junit.Assert.assertFalse
-import static org.junit.Assert.assertTrue
-
 /**
  * Created by TGITS on 09/01/2016.
  */
-class LuhnNumberValidatorTest extends Specification {
+class LuhnNumberValidatorSpec extends Specification {
 
     @Shared
     LuhnNumberValidator validator

@@ -6,7 +6,7 @@ import spock.lang.Specification
 /**
  * Created by TGITS on 09/01/2016.
  */
-class IntegerValidatorTest extends Specification {
+class IntegerValidatorSpec extends Specification {
 
     @Shared
     IntegerValidator validator

@@ -8,7 +8,7 @@ import tgits.test.data.tools.validator.IntegerValidator
 /**
  * Created by TGITS on 09/01/2016.
  */
-class IntegerGeneratorTest extends Specification {
+class IntegerGeneratorSpec extends Specification {
 
     @Shared
     IntegerValidator validator

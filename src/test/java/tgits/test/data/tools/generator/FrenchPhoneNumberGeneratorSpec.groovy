@@ -7,7 +7,7 @@ import tgits.test.data.tools.validator.FrenchPhoneNumberValidator
 /**
  * Created by TGITS on 08/01/2016.
  */
-class FrenchPhoneNumberGeneratorTest extends Specification {
+class FrenchPhoneNumberGeneratorSpec extends Specification {
 
     @Shared
     FrenchPhoneNumberGenerator generator

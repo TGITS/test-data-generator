@@ -6,7 +6,7 @@ import spock.lang.Specification
 /**
  * Created by cvaudry on 09/01/2016.
  */
-class FrenchPhoneNumberValidatorTest extends Specification{
+class FrenchPhoneNumberValidatorSpec extends Specification {
 
     @Shared
     FrenchPhoneNumberValidator validator
